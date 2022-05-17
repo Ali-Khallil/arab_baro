@@ -32,30 +32,32 @@ arab_data_core <- arab_data |>
 arab_data_ir <- arab_data |>
   rename_with(.fn = tolower,.col=everything())|>
   filter(country==7)|> 
-  select(q732B,q730B,q734A,q734B,q104,Q104a_1)|>
-  mutate(q734B=case_when(q734B== 1 ~ 'Strongly favor',
-                         q734B== 2 ~ 'Favor',
-                         q734B== 3 ~ 'Oppose',
-                         q734B== 4 ~ 'Strongly oppose',
-                         q734B== 98 ~ 'Don’t know',
-                         q734B== 99 ~ 'Refused to answer'))|>
+  select(q732b,q730b,q734a,q734b,q104,q104a_1)|>
+  mutate(q734b=case_when(q734b== 1 ~ 'Strongly favor',
+                         q734b== 2 ~ 'Favor',
+                         q734b== 3 ~ 'Oppose',
+                         q734b== 4 ~ 'Strongly oppose',
+                         q734b== 98 ~ 'Don’t know',
+                         q734b== 99 ~ 'Refused to answer',
+                         T ~ 'na'))|>
   rename(q734b, 'relations between Morocco and Israel'=q734b)|>
-  
   
   mutate(q104=case_when(q104== 1 ~ 'yes',
                         q104== 2 ~ 'no',
                         q104== 98 ~ 'Don’t know',
-                        q104== 99 ~ 'Refused to answer'))|>
+                        q104== 99 ~ 'Refused to answer',
+                        T ~ 'na'))|>
   rename(q104, 'thought about emigrating from your country'=q104)|>
   
   
-  mutate(Q104a_1=case_when(Q104a_1== 1 ~ 'Strongly favor',
-                           Q104a_1== 2 ~ 'Favor',
-                           Q104a_1== 3 ~ 'Oppose',
-                           Q104a_1== 4 ~ 'Strongly oppose',
-                           Q104a_1== 98 ~ 'Don’t know',
-                           Q104a_1== 99 ~ 'Refused to answer'))|>
-  rename(Q104a_1, 'Why have you thought about emigrating?'=Q104a_1)|>
+  mutate(q104a_1=case_when(q104a_1== 1 ~ 'Strongly favor',
+                           q104a_1== 2 ~ 'Favor',
+                           q104a_1== 3 ~ 'Oppose',
+                           q104a_1== 4 ~ 'Strongly oppose',
+                           q104a_1== 98 ~ 'Don’t know',
+                           q104a_1== 99 ~ 'Refused to answer',
+                           T ~ 'na'))|>
+  rename(q104a_1, 'Why have you thought about emigrating?'=q104a_1)|>
   
   View()
   
